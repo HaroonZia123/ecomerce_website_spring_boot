@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Customer List</title>
+</head>
+<body>
+    <h1>Customer List</h1>
+    <span th:if="${session.admin}">
+    <form th:action="@{/customers/search}" method="get">
+        <input type="text" name="search" placeholder="Search by Customer Name">
+        <button type="submit">Search</button>
+    </form>
+        </span>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Address</th>
+                <th>Phone</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="customer : ${customers}">
+                <td th:text="${customer.id}"></td>
+                <td th:text="${customer.name}"></td>
+                <td th:text="${customer.email}"></td>
+                <td th:text="${customer.address}"></td>
+                <td th:text="${customer.phone}"></td>
+                <td>
+                    <a th:if="${session.admin}" th:href="@{/customers/edit/{id}(id=${customer.id})}">Edit</a> |
+                    <a  th:if="${session.admin}" th:href="@{/customers/delete/{id}(id=${customer.id})}">Delete</a> |
+                    <a th:href="@{/customers/view-orders/{id}(id=${customer.id})}">View Orders</a> |
+                    <a th:href="@{/customers/add-order/{id}(id=${customer.id})}">Add Order</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    
+    <br><br>
+    <a th:if="${session.admin}" th:href="@{/customers/add}">Add Customer</a>
+    <br>
+            <a th:href="@{/home}">Back to Home</a>
+
+</body>
+</html>

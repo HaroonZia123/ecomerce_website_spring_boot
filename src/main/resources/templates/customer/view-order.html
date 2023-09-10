@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <title>Customer Orders</title>
+    </head>
+    <body>
+        <h1>Customer Orders</h1>
+
+        <!-- Display customer information -->
+        <h2>Customer Information:</h2>
+        <p><strong>Name:</strong> <span th:text="${customer.name}"></span></p>
+        <p><strong>ID  :</strong> <span th:text="${customer.id}"></span></p>
+        <!-- Include additional customer details as needed -->
+
+        <!-- List customer's orders -->
+        <h2>Orders:</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Order ID</th>
+                    <th>Name</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <!-- Include additional order details as needed -->
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="order : ${orders}">
+                    <td th:text="${order.id}"></td>
+                    <td th:text="${order.name}"></td>
+                    <td th:text="${order.price}"></td>
+                    <td th:text="${order.quantity}"></td>
+                    <!-- Include additional order details as needed -->
+                </tr>
+            </tbody>
+        </table>
+
+        <a th:href="@{/customers/list}">Back to Customer List</a>
+
+    </body>
+</html>
